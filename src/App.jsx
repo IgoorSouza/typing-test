@@ -3,8 +3,6 @@ import axios from "axios";
 
 let textsToType = [];
 
-//R1MN4GdYTNJAQ8tbh/y/dg==PnqDgfyX1Gfle8Om
-
 function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [currentTextToType, setCurrentTextToType] = useState(null);
