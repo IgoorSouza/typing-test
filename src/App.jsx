@@ -91,7 +91,6 @@ function App() {
           placeholder="Digite o texto aqui..."
           onPaste={(event) => {
             event.preventDefault();
-            return false;
           }}
           onChange={getText}
         />
