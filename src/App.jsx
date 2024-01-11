@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
-const textsToType = [
-  "Digite isso.",
-  "Outro exemplo de texto para digitar.",
-  "Mais um texto.",
-  "Este é um teste de digitação."
-];
+let textsToType = [];
+
+//R1MN4GdYTNJAQ8tbh/y/dg==PnqDgfyX1Gfle8Om
 
 function App() {
   const [isTyping, setIsTyping] = useState(false);
@@ -20,7 +18,7 @@ function App() {
   };
 
   const getTextToType = () => {
-    let newText = textsToType[Math.floor(Math.random() * textsToType.length)];
+    let newText = textsToType[Math.floor(Math.random() * textsToType.length)].joke;
 
     while (newText === currentTextToType) {
       newText = textsToType[Math.floor(Math.random() * textsToType.length)];
@@ -30,7 +28,12 @@ function App() {
   };
 
   useEffect(() => {
-    getTextToType();
+    axios({
+      method: "get",
+      url: "https://api.api-ninjas.com/v1/dadjokes?limit=10",
+      headers: { "X-Api-Key": "R1MN4GdYTNJAQ8tbh/y/dg==PnqDgfyX1Gfle8Om" },
+      responseType: "json",
+    }).then((res) => (textsToType = res.data)).then(() => getTextToType())
   }, []);
 
   const getText = (event) => {
@@ -69,7 +72,7 @@ function App() {
       </button>
 
       <div className="content">
-        <h1>Teste de Velocidade de Digitação</h1>
+        <h1>Teste de Velocidade de Digitação (Inglês)</h1>
 
         <p>
           Para começar o teste, clique na caixa de texto abaixo e comece a
@@ -79,7 +82,7 @@ function App() {
         </p>
 
         <div className="textToType">
-          <p>{currentTextToType}</p>
+          <p>{currentTextToType ?? "Carregando frase..."}</p>
         </div>
 
         <textarea
@@ -92,7 +95,11 @@ function App() {
           <h3>Parabéns! Você levou {timeSpent} segundos.</h3>
         ) : null}
 
-        <button className="restartButton" onClick={restart} disabled={history.length === 0}>
+        <button
+          className="restartButton"
+          onClick={restart}
+          disabled={history.length === 0}
+        >
           Reiniciar
         </button>
 
