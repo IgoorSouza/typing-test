@@ -1,0 +1,117 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  padding: 20px;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.container, .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  width: 70%;
+}
+
+.container button {
+  font-size: 20px;
+  height: 50px;
+  border: none;
+  color: white;
+  background-color: #007fff;
+}
+
+.container button:hover {
+  cursor: pointer;
+  background-color: #0066ff;
+}
+
+.content p {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.textToType {
+  width: 100%;
+  text-align: center;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: 20px;
+}
+
+.textToType p {
+  color: black;
+  font-size: 24px;
+}
+
+textarea {
+  font-size: 16px;
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.toggleTheme {
+  width: 160px;
+  align-self: flex-end;
+}
+
+.restartButton {
+  width: 120px;
+  align-self: center;
+}
+
+.history {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.history p {
+  margin: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .container button {
+    font-size: 16px;
+    height: 40px;
+  }
+
+  .content p {
+    font-size: 16px;
+    line-height: 30px;
+  }
+
+  .textToType p {
+    font-size: 18px;
+  }
+
+  .toggleTheme {
+    width: 120px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .restartButton {
+    width: 90px;
+  }
+  
+  .history p {
+    margin: 5px;
+  }
+}
