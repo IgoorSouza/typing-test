@@ -46,9 +46,11 @@ body {
 
 .textToType {
   width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
   text-align: center;
   background-color: rgb(230, 230, 230);
-  margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .textToType p {

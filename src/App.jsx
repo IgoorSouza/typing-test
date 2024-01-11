@@ -16,7 +16,8 @@ function App() {
   };
 
   const getTextToType = () => {
-    let newText = textsToType[Math.floor(Math.random() * textsToType.length)].joke;
+    let newText =
+      textsToType[Math.floor(Math.random() * textsToType.length)].joke;
 
     while (newText === currentTextToType) {
       newText = textsToType[Math.floor(Math.random() * textsToType.length)];
@@ -31,7 +32,9 @@ function App() {
       url: "https://api.api-ninjas.com/v1/dadjokes?limit=10",
       headers: { "X-Api-Key": "R1MN4GdYTNJAQ8tbh/y/dg==PnqDgfyX1Gfle8Om" },
       responseType: "json",
-    }).then((res) => (textsToType = res.data)).then(() => getTextToType())
+    })
+      .then((res) => (textsToType = res.data))
+      .then(() => getTextToType());
   }, []);
 
   const getText = (event) => {
@@ -76,7 +79,7 @@ function App() {
           Para começar o teste, clique na caixa de texto abaixo e comece a
           digitar o texto exibido acima dela. O cronômetro começará
           automaticamente assim que você começar a digitar. Quando você terminar
-          de digitar o texto corretamente, o tempo que você levou será exibido.
+          de digitar o texto corretamente, o tempo que você levou será exibido. Lembre-se de diferenciar letras maiúsculas e minúsculas e preste atenção na pontuação!
         </p>
 
         <div className="textToType">
@@ -86,6 +89,10 @@ function App() {
         <textarea
           rows="5"
           placeholder="Digite o texto aqui..."
+          onPaste={(event) => {
+            event.preventDefault();
+            return false;
+          }}
           onChange={getText}
         />
 
