@@ -16,7 +16,8 @@ body {
   color: white;
 }
 
-.container, .content {
+.container,
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +25,7 @@ body {
 
 .content {
   width: 70%;
+  max-width: 900px;
 }
 
 .container button {
@@ -113,7 +115,7 @@ textarea {
   .restartButton {
     width: 90px;
   }
-  
+
   .history p {
     margin: 5px;
   }
