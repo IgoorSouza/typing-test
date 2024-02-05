@@ -12,21 +12,17 @@ function App() {
 
   const toggleTheme = () => {
     let body = document.getElementsByTagName("body")[0];
+
+    if (body.classList.contains("dark")) {
+      localStorage.removeItem("darkTheme");
+    } else {
+      localStorage.setItem("darkTheme", true);
+    }
+
     body.classList.toggle("dark");
   };
 
-  const getTextToType = () => {
-    let newText =
-      textsToType[Math.floor(Math.random() * textsToType.length)].joke;
-
-    while (newText === currentTextToType) {
-      newText = textsToType[Math.floor(Math.random() * textsToType.length)];
-    }
-
-    setCurrentTextToType(newText);
-  };
-
-  useEffect(() => {
+  const fetchTexts = () => {
     axios({
       method: "get",
       url: "https://api.api-ninjas.com/v1/dadjokes?limit=10",
@@ -35,6 +31,34 @@ function App() {
     })
       .then((res) => (textsToType = res.data))
       .then(() => getTextToType());
+  };
+
+  const getTextToType = () => {
+    if (textsToType.length > 0) {
+      let randomText = [Math.floor(Math.random() * textsToType.length)];
+      let newText = textsToType[randomText].joke;
+
+      textsToType.splice(randomText, 1);
+
+      setCurrentTextToType(newText);
+    } else {
+      setCurrentTextToType(null);
+      fetchTexts();
+    }
+  };
+
+  useEffect(() => {
+    let darkTheme = localStorage.getItem("darkTheme");
+
+    if (darkTheme && darkTheme !== false) {
+      let body = document.getElementsByTagName("body")[0];
+      body.classList.add("dark");
+    }
+
+    let getHistory = localStorage.getItem("history");
+    if (getHistory !== null) setHistory(JSON.parse(getHistory));
+
+    fetchTexts();
   }, []);
 
   const getText = (event) => {
@@ -55,6 +79,16 @@ function App() {
           time,
         },
       ]);
+      localStorage.setItem(
+        "history",
+        JSON.stringify([
+          ...history,
+          {
+            text: currentTextToType,
+            time,
+          },
+        ])
+      );
 
       getTextToType();
     }
@@ -64,6 +98,7 @@ function App() {
     setHistory([]);
     setTimeSpent(0);
     getTextToType();
+    localStorage.removeItem("history");
   };
 
   return (
@@ -79,7 +114,9 @@ function App() {
           Para começar o teste, clique na caixa de texto abaixo e comece a
           digitar o texto exibido acima dela. O cronômetro começará
           automaticamente assim que você começar a digitar. Quando você terminar
-          de digitar o texto corretamente, o tempo que você levou será exibido. Lembre-se de diferenciar letras maiúsculas e minúsculas e preste atenção na pontuação!
+          de digitar o texto corretamente, o tempo que você levou será exibido.
+          Lembre-se de diferenciar letras maiúsculas e minúsculas e preste
+          atenção na pontuação!
         </p>
 
         <div className="textToType">
@@ -89,6 +126,7 @@ function App() {
         <textarea
           rows="5"
           placeholder="Digite o texto aqui..."
+          disabled={!currentTextToType}
           onPaste={(event) => {
             event.preventDefault();
           }}
