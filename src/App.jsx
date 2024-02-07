@@ -120,16 +120,17 @@ function App() {
         </p>
 
         <div className="textToType">
-          <p>{currentTextToType ?? "Carregando frase..."}</p>
+          <p onCopy={event => event.preventDefault() }
+          >
+            {currentTextToType ?? "Carregando frase..."}
+          </p>
         </div>
 
         <textarea
           rows="5"
           placeholder="Digite o texto aqui..."
           disabled={!currentTextToType}
-          onPaste={(event) => {
-            event.preventDefault();
-          }}
+          onPaste={event => event.preventDefault()}
           onChange={getText}
         />
 
