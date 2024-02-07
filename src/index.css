@@ -28,6 +28,10 @@ body {
   max-width: 900px;
 }
 
+.content h1 {
+  text-align: center;
+}
+
 .container button {
   font-size: 20px;
   height: 50px;
@@ -44,6 +48,10 @@ body {
 .content p {
   font-size: 18px;
   line-height: 30px;
+}
+
+.content > p {
+  text-align: justify;
 }
 
 .textToType {
@@ -93,6 +101,14 @@ textarea {
   .container button {
     font-size: 16px;
     height: 40px;
+  }
+
+  .content {
+    width: 80%;
+  }
+
+  .content h1 {
+    font-size: 28px;
   }
 
   .content p {
