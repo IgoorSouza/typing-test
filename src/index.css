@@ -45,13 +45,13 @@ body {
   background-color: #0066ff;
 }
 
+.content > p {
+  text-align: justify;
+}
+
 .content p {
   font-size: 18px;
   line-height: 30px;
-}
-
-.content > p {
-  text-align: justify;
 }
 
 .textToType {
