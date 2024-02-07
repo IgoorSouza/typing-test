@@ -33,20 +33,6 @@ function App() {
       .then(() => getTextToType());
   };
 
-  const getTextToType = () => {
-    if (textsToType.length > 0) {
-      let randomText = [Math.floor(Math.random() * textsToType.length)];
-      let newText = textsToType[randomText].joke;
-
-      textsToType.splice(randomText, 1);
-
-      setCurrentTextToType(newText);
-    } else {
-      setCurrentTextToType(null);
-      fetchTexts();
-    }
-  };
-
   useEffect(() => {
     let darkTheme = localStorage.getItem("darkTheme");
 
@@ -61,10 +47,25 @@ function App() {
     fetchTexts();
   }, []);
 
+  const getTextToType = () => {
+    if (textsToType.length > 0) {
+      let randomText = [Math.floor(Math.random() * textsToType.length)];
+      let newText = textsToType[randomText].joke;
+
+      textsToType.splice(randomText, 1);
+
+      setCurrentTextToType(newText);
+    } else {
+      setCurrentTextToType(null);
+      fetchTexts();
+    }
+  };
+
   const getText = (event) => {
     if (!isTyping) {
       setStartTime(Date.now());
       setIsTyping(true);
+      setTimeSpent(0);
     } else if (event.target.value === currentTextToType) {
       event.target.value = "";
       let time = (Date.now() - startTime) / 1000;
@@ -79,6 +80,7 @@ function App() {
           time,
         },
       ]);
+
       localStorage.setItem(
         "history",
         JSON.stringify([
@@ -120,8 +122,7 @@ function App() {
         </p>
 
         <div className="textToType">
-          <p onCopy={event => event.preventDefault() }
-          >
+          <p onCopy={(event) => event.preventDefault()}>
             {currentTextToType ?? "Carregando frase..."}
           </p>
         </div>
@@ -130,21 +131,21 @@ function App() {
           rows="5"
           placeholder="Digite o texto aqui..."
           disabled={!currentTextToType}
-          onPaste={event => event.preventDefault()}
+          onPaste={(event) => event.preventDefault()}
           onChange={getText}
         />
 
-        {timeSpent != 0 ? (
-          <h3>Parabéns! Você levou {timeSpent} segundos.</h3>
-        ) : null}
+        {timeSpent != 0 && <h3>Parabéns! Você levou {timeSpent} segundos.</h3>}
 
-        <button
-          className="restartButton"
-          onClick={restart}
-          disabled={history.length === 0}
-        >
-          Reiniciar
-        </button>
+        {history.length > 0 && (
+          <button
+            className="restartButton"
+            onClick={restart}
+            disabled={history.length === 0}
+          >
+            Limpar histórico
+          </button>
+        )}
 
         <div className="history">
           {history.map((item, index) => {

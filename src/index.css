@@ -23,6 +23,24 @@ body {
   align-items: center;
 }
 
+.container button {
+  font-size: 20px;
+  padding: 10px;
+  border: none;
+  color: white;
+  background-color: #007fff;
+}
+
+.container button:hover {
+  cursor: pointer;
+  background-color: #0066ff;
+}
+
+.toggleTheme {
+  width: 160px;
+  align-self: flex-end;
+}
+
 .content {
   width: 70%;
   max-width: 900px;
@@ -36,19 +54,6 @@ body {
   text-align: justify;
 }
 
-.container button {
-  font-size: 20px;
-  height: 50px;
-  border: none;
-  color: white;
-  background-color: #007fff;
-}
-
-.container button:hover {
-  cursor: pointer;
-  background-color: #0066ff;
-}
-
 .content p {
   font-size: 18px;
   line-height: 30px;
@@ -57,15 +62,15 @@ body {
 .textToType {
   width: 100%;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   background-color: rgb(230, 230, 230);
   box-sizing: border-box;
 }
 
 .textToType p {
-  color: black;
   font-size: 24px;
+  color: black;
 }
 
 textarea {
@@ -73,24 +78,19 @@ textarea {
   width: 100%;
   height: 120px;
   padding: 10px;
-  box-sizing: border-box;
   margin-bottom: 20px;
+  box-sizing: border-box;
   resize: none;
 }
 
-.toggleTheme {
-  width: 160px;
-  align-self: flex-end;
-}
-
 .restartButton {
-  width: 120px;
+  width: 180px;
   align-self: center;
 }
 
 .history {
-  text-align: center;
   margin-top: 10px;
+  text-align: center;
 }
 
 .history p {
@@ -100,7 +100,10 @@ textarea {
 @media screen and (max-width: 700px) {
   .container button {
     font-size: 16px;
-    height: 40px;
+  }
+
+  .toggleTheme {
+    width: 120px;
   }
 
   .content {
@@ -115,19 +118,12 @@ textarea {
     font-size: 18px;
   }
 
-  .toggleTheme {
-    width: 120px;
-  }
-
-  h3 {
-    font-size: 16px;
-  }
-
   .restartButton {
-    width: 90px;
+    width: 150px;
   }
 
   .history p {
+    font-size: 16px;
     margin: 5px;
   }
 }
